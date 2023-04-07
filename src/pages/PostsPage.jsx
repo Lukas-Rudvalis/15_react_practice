@@ -34,14 +34,14 @@ function PostsPage() {
   // tada jis lygus "There was a network error, try agail later"
 
   function handleTagFilterChange(e) {
-    console.log('e.target.value ===', e.target.value);
+    // console.log('e.target.value ===', e.target.value);
     setActiveFilterVal(e.target.value);
   }
 
   let filteredPosts = [];
   if (activeFilterVal !== 'all') {
-    filteredPosts = allPosts.filter((post) =>
-      post.tags.includes(activeFilterVal),
+    filteredPosts = allPosts.filter(({ tags }) =>
+      tags.includes(activeFilterVal),
     );
   } else filteredPosts = allPosts;
 
@@ -64,7 +64,7 @@ function PostsPage() {
                 onChange={handleTagFilterChange}
                 type="radio"
                 name="tagFilter"
-                // checked={activeFilterVal}
+                checked={activeFilterVal === tag}
                 value={tag}
                 id={tag}
               />
