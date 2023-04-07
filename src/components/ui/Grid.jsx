@@ -7,7 +7,7 @@ const SGrid = styled.div`
   gap: 16px;
 `;
 
-function Grid({ children, cols }) {
+function Grid({ children, cols = 3 }) {
   return <SGrid cols={cols}>{children}</SGrid>;
 }
 Grid.propTypes = {
