@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const AlertWrapper = styled.div`
   position: relative;
@@ -39,6 +40,10 @@ const Alert = ({ type = 'info', children }) => {
       <CloseButton onClick={() => setShow(false)}>&times;</CloseButton>
     </AlertWrapper>
   );
+};
+Alert.propTypes = {
+  type: PropTypes.oneOf(['info', 'danger', 'success']),
+  children: PropTypes.string,
 };
 
 export default Alert;
