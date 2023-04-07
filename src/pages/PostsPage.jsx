@@ -4,6 +4,7 @@ import useGetData from '../hooks/useGetData';
 import Alert from '../components/ui/Alert';
 import styled from 'styled-components';
 import { useState } from 'react';
+import { getTags } from '../components/utils/helpers';
 
 const Wrap = styled.div`
   margin-top: 3rem;
@@ -32,12 +33,17 @@ function PostsPage() {
   // errorText yra lygus tusciai kabutei, bet jei errorPosts yra lygus ERR_NETWORK
   // tada jis lygus "There was a network error, try agail later"
 
-  function getTags() {
-    const allTags2dArr = allPosts.map((obj) => obj.tags);
-    const allTags1dArr = [].concat(...allTags2dArr);
-    const uniqueTags = ['all', ...new Set(allTags1dArr)];
-    return uniqueTags;
+  function handleTagFilterChange(e) {
+    console.log('e.target.value ===', e.target.value);
+    setActiveFilterVal(e.target.value);
   }
+
+  let filteredPosts = [];
+  if (activeFilterVal !== 'all') {
+    filteredPosts = allPosts.filter((post) =>
+      post.tags.includes(activeFilterVal),
+    );
+  } else filteredPosts = allPosts;
 
   return (
     <Container>
@@ -52,12 +58,13 @@ function PostsPage() {
       <fieldset>
         <legend>Filter by</legend>
         <Flex>
-          {getTags().map((tag) => (
+          {getTags(allPosts).map((tag) => (
             <div key={tag}>
               <input
-                onChange={() => setActiveFilterVal(tag)}
+                onChange={handleTagFilterChange}
                 type="radio"
-                name="tags"
+                name="tagFilter"
+                // checked={activeFilterVal}
                 value={tag}
                 id={tag}
               />
@@ -67,7 +74,7 @@ function PostsPage() {
         </Flex>
       </fieldset>
       {/* 5 sukrti ir atvaizduoti styled komponenta jei errorText yra ne tuscia kabute */}
-      <PostsList posts={allPosts} />
+      <PostsList posts={filteredPosts} />
     </Container>
   );
 }
