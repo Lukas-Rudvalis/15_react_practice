@@ -38,7 +38,7 @@ function NewPostPage() {
       date: Yup.date().required(),
     }),
     onSubmit(values) {
-      console.log('submiting...', values);
+      // console.log('submiting...', values);
       const valuesWithTagArr = { ...values };
       valuesWithTagArr.tags = valuesWithTagArr.tags.split(',');
       sendDataToBe(valuesWithTagArr);
