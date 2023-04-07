@@ -10,6 +10,7 @@ function SinglePostPage() {
   const { postId } = useParams();
   console.log('postId ===', postId);
 
+  // eslint-disable-next-line no-unused-vars
   const [currentPost, setPost, postErr, isLoading] = useGetData(
     `http://localhost:5000/posts/${postId}`,
   );

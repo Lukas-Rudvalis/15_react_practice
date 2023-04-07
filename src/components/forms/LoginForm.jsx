@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styled from 'styled-components';
 import axios from 'axios';
-import { InputField } from '../ui/InputComps';
+import InputField from '../ui/InputComps';
 import { useAuthContext } from '../../store/AuthProvider';
 
 const url = 'https://reqres.in/api/login';

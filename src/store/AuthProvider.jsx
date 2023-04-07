@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const AuthContext = createContext({
   token: null,
@@ -39,6 +40,13 @@ function AuthProvider({ children }) {
     <AuthContext.Provider value={authCtx}>{children}</AuthContext.Provider>
   );
 }
+
+AuthProvider.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
+};
 
 export default AuthProvider;
 

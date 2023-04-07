@@ -1,6 +1,6 @@
 import React from 'react';
 import Container from '../components/ui/Container';
-import { InputField } from '../components/ui/InputComps';
+import InputField from '../components/ui/InputComps';
 import { useFormik } from 'formik';
 import { SubmitButton } from '../components/ui/Button.styled';
 import * as Yup from 'yup';

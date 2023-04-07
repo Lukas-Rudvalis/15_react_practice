@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const Input = styled.input`
   font-size: 16px;
@@ -42,7 +43,7 @@ const Label = styled.label`
   margin-bottom: 4px;
 `;
 
-export const InputField = ({ label, error, type, ...rest }) => {
+const InputField = ({ label, error, type = 'text', ...rest }) => {
   //
 
   const isTextArea = type === 'texarea' ? true : false;
@@ -59,3 +60,10 @@ export const InputField = ({ label, error, type, ...rest }) => {
     </InputWrapper>
   );
 };
+InputField.propTypes = {
+  label: PropTypes.string.isRequired,
+  error: PropTypes.string,
+  type: PropTypes.string,
+};
+
+export default InputField;

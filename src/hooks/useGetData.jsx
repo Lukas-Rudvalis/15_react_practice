@@ -25,7 +25,7 @@ function useGetData(url) {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [url]);
 
   return [data, setData, error, isLoading];
 }
