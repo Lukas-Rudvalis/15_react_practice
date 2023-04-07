@@ -8,7 +8,7 @@ import useGetData from '../hooks/useGetData';
 function SinglePostPage() {
   // /posts/:postId - :postId yra url parametras
   const { postId } = useParams();
-  console.log('postId ===', postId);
+  // console.log('postId ===', postId);
 
   // eslint-disable-next-line no-unused-vars
   const [currentPost, setPost, postErr, isLoading] = useGetData(

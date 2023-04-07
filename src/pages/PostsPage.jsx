@@ -20,7 +20,7 @@ function PostsPage() {
       })
       .catch((err) => {
         console.warn('axios.get', err);
-        console.log('err.code ===', err.code);
+        // console.log('err.code ===', err.code);
         // 1 jei err.code yra lygus ERR_NETWORK
         // 3 tai mes nustatom sita koda i errorPosts state
       });

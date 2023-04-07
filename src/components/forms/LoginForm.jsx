@@ -20,7 +20,7 @@ const inputsData = [
 
 function LoginForm() {
   const authCtx = useAuthContext();
-  console.log('authCtx ===', authCtx);
+  // console.log('authCtx ===', authCtx);
   const [beError, setBeError] = useState('');
 
   const formik = useFormik({
@@ -33,7 +33,7 @@ function LoginForm() {
       password: Yup.string().min(4).trim().required(),
     }),
     onSubmit: (values) => {
-      console.log('form values ===', values);
+      // console.log('form values ===', values);
       // clear errors
       setBeError('');
       // siusti prisijungimui
@@ -46,7 +46,7 @@ function LoginForm() {
     axios
       .post(url, loginObj)
       .then((resp) => {
-        console.log('resp ===', resp.data);
+        // console.log('resp ===', resp.data);
         // irasom i contexta email, token
         const token = resp.data.token;
         const email = loginObj.email;
@@ -54,7 +54,7 @@ function LoginForm() {
       })
       .catch((err) => {
         console.warn('sendLoginData error', err);
-        console.log('err.response.data.error ===', err.response.data.error);
+        // console.log('err.response.data.error ===', err.response.data.error);
         setBeError(err.response.data.error);
       });
   }
