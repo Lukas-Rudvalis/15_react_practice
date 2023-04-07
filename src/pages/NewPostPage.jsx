@@ -72,7 +72,9 @@ function NewPostPage() {
     <Container>
       <h1>NewPostPage</h1>
       <p>Welcome to NewPostPage</p>
-      <Feedback show={formSentSuccess}>Post created</Feedback>
+      <Feedback type={'success'} show={formSentSuccess}>
+        Post created
+      </Feedback>
       <Feedback show={toShowErrror} type={'error'}>
         Tinklo klaida, bandykite veliau
       </Feedback>

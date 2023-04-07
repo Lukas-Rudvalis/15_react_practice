@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
 import Container from '../components/ui/Container';
 import PostsList from '../components/postsComponents/PostsList';
-import axios from 'axios';
 import useGetData from '../hooks/useGetData';
 import Alert from '../components/ui/Alert';
+import styled from 'styled-components';
+
+const Wrap = styled.div`
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+`;
 
 function PostsPage() {
   // 2 sukrti state klaidai errorPosts
@@ -12,7 +16,7 @@ function PostsPage() {
   );
 
   if (error) {
-    console.log('error ===', error);
+    // console.log('error ===', error);
   }
 
   const networkError = error.code === 'ERR_NETWORK';
@@ -23,11 +27,14 @@ function PostsPage() {
 
   return (
     <Container>
+      {isLoading && <Alert>Loading...</Alert>}
       {networkError && (
         <Alert type={'danger'}>Ivyko klaida, bandykite veliau</Alert>
       )}
-      <h1>PostsPage</h1>
-      <p>Welcome to PostsPage</p>
+      <Wrap>
+        <h1>PostsPage</h1>
+        <p>Welcome to PostsPage</p>
+      </Wrap>
       {/* 5 sukrti ir atvaizduoti styled komponenta jei errorText yra ne tuscia kabute */}
       <PostsList posts={allPosts} />
     </Container>
