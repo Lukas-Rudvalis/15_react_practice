@@ -12,10 +12,10 @@ function Grid({ children, cols = 3 }) {
 }
 Grid.propTypes = {
   cols: PropTypes.number,
-  children: PropTypes.oneOfType(
+  children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
-  ),
+  ]).isRequired,
 };
 
 export default Grid;

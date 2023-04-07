@@ -13,10 +13,10 @@ function Card({ children }) {
   return <SCard className="card">{children}</SCard>;
 }
 Card.propTypes = {
-  children: PropTypes.oneOfType(
+  children: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
-  ),
+  ]).isRequired,
 };
 
 export default Card;
