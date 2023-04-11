@@ -6,11 +6,15 @@ const AuthContext = createContext({
   login(userToken, userEmail) {},
   logout() {},
   isLoggedIn: false,
+  email: null,
 });
 
+const localEmailKey = 'LOCAL_EMAIL';
+const localTokenKey = 'LOCAL_TOKEN';
+
 function AuthProvider({ children }) {
-  const [token, setToken] = useState('');
-  const [email, setEmail] = useState('');
+  const [token, setToken] = useState(localStorage.getItem(localTokenKey) || '');
+  const [email, setEmail] = useState(localStorage.getItem(localEmailKey) || '');
 
   // const isLoggedIn = token === '' ? false : true;
   // const isLoggedIn = token ? true : false;
@@ -19,12 +23,16 @@ function AuthProvider({ children }) {
   function login(userToken, userEmail) {
     setToken(userToken);
     setEmail(userEmail);
+    localStorage.setItem(localTokenKey, userToken);
+    localStorage.setItem(localEmailKey, userEmail);
   }
   function logout() {
     // sukurti funkcija logout
     // nustato token ir email i ''
     setToken('');
     setEmail('');
+    localStorage.removeItem(localTokenKey);
+    localStorage.removeItem(localEmailKey);
   }
   // perduodam logout i authCtx
   // panaudojam logout Hederyje paspaudus logout mygtuka
