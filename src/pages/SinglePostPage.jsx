@@ -4,6 +4,7 @@ import { useParams } from 'react-router';
 import SinglePost from '../components/postsComponents/SinglePost';
 import styled from 'styled-components';
 import useGetData from '../hooks/useGetData';
+import CommentBlock from '../components/commentsComponents/CommentBlock';
 
 function SinglePostPage() {
   // /posts/:postId - :postId yra url parametras
@@ -24,6 +25,7 @@ function SinglePostPage() {
         <>
           <Title>{currentPost.title}</Title>
           <SinglePost post={currentPost} full />
+          <CommentBlock postId={postId} />
         </>
       )}
     </Container>
