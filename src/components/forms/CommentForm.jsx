@@ -4,14 +4,9 @@ import InputField from '../ui/InputComps';
 import { useFormik } from 'formik';
 import { SubmitButton } from '../ui/Button.styled';
 import { useAuthContext } from '../../store/AuthProvider';
+import PropTypes from 'prop-types';
 
-const commentObj = {
-  authorEmail: 'james@bond.com',
-  text: '',
-  postId: '',
-};
-
-function CommentForm() {
+function CommentForm({ postId, onNewComment }) {
   const { email } = useAuthContext();
   const formik = useFormik({
     initialValues: {
@@ -28,7 +23,13 @@ function CommentForm() {
       return errors;
     },
     onSubmit(values) {
-      console.log('values ===', values);
+      // console.log('values ===', values);
+      const commentObj = {
+        authorEmail: values.author,
+        text: values.text,
+        postId,
+      };
+      onNewComment(commentObj);
     },
   });
 
@@ -57,6 +58,11 @@ function CommentForm() {
     </Wrap>
   );
 }
+
+CommentForm.propTypes = {
+  postId: PropTypes.string,
+  onNewComment: PropTypes.func,
+};
 
 const Wrap = styled.div`
   margin-top: 3rem;
