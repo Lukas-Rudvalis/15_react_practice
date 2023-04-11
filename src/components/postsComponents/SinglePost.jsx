@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button from '../ui/Button.styled';
 import { Link } from 'react-router-dom';
 
-function SinglePost({ post, full = false }) {
+function SinglePost({ post, full = false, onDeletePost }) {
   return (
     <Card>
       {!full && <Title>{post.title}</Title>}
@@ -15,7 +15,7 @@ function SinglePost({ post, full = false }) {
         <Date>{post.date}</Date>
       </Footer>
       <Control>
-        <Button>Delete</Button>
+        {!full && <Button onClick={() => onDeletePost(post.id)}>Delete</Button>}
         {full && <Link to={`/posts`}>Go back</Link>}
         {!full && <Link to={`/posts/${post.id}`}>Read more...</Link>}
       </Control>
@@ -26,6 +26,7 @@ function SinglePost({ post, full = false }) {
 SinglePost.propTypes = {
   post: PropTypes.object,
   full: PropTypes.bool,
+  onDeletePost: PropTypes.func,
 };
 
 const Control = styled.div`

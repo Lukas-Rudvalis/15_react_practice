@@ -5,6 +5,7 @@ import Alert from '../components/ui/Alert';
 import styled from 'styled-components';
 import { useState } from 'react';
 import { getTags } from '../components/utils/helpers';
+import axios from 'axios';
 
 const Wrap = styled.div`
   margin-top: 3rem;
@@ -45,6 +46,21 @@ function PostsPage() {
     );
   } else filteredPosts = allPosts;
 
+  function deletePostHandler(idToDelete) {
+    axios
+      .delete(`http://localhost:5000/posts/${idToDelete}`)
+      .then((resp) => {
+        console.log('resp ===', resp);
+        if (resp.status === 200) {
+          console.log('istrinta sekmingai');
+          setAllPosts((prevPosts) =>
+            prevPosts.filter(({ id }) => id !== idToDelete),
+          );
+        }
+      })
+      .catch((err) => console.warn(err));
+  }
+
   return (
     <Container>
       {isLoading && <Alert>Loading...</Alert>}
@@ -74,7 +90,7 @@ function PostsPage() {
         </Flex>
       </fieldset>
       {/* 5 sukrti ir atvaizduoti styled komponenta jei errorText yra ne tuscia kabute */}
-      <PostsList posts={filteredPosts} />
+      <PostsList posts={filteredPosts} onDeletePost={deletePostHandler} />
     </Container>
   );
 }

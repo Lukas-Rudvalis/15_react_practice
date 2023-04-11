@@ -28,9 +28,7 @@ function Header() {
               <SiteLink end to={'/posts'}>
                 Posts
               </SiteLink>
-              <SiteLink end to={'/posts/new'}>
-                Add post
-              </SiteLink>
+              <SiteLink to={'/posts/new'}>Add post</SiteLink>
             </>
           )}
         </Nav>

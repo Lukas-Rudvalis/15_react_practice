@@ -2,11 +2,11 @@ import React from 'react';
 import SinglePost from './SinglePost';
 import PropTypes from 'prop-types';
 import Grid from '../ui/Grid';
-function PostsList({ posts }) {
+function PostsList({ posts, onDeletePost }) {
   return (
     <Grid cols={2}>
       {posts.map((post) => (
-        <SinglePost key={post.id} post={post} />
+        <SinglePost key={post.id} post={post} onDeletePost={onDeletePost} />
       ))}
     </Grid>
   );
@@ -14,6 +14,7 @@ function PostsList({ posts }) {
 
 PostsList.propTypes = {
   posts: PropTypes.array,
+  onDeletePost: PropTypes.func,
 };
 
 export default PostsList;

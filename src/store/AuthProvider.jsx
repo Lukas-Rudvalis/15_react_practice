@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const AuthContext = createContext({
@@ -20,19 +20,25 @@ function AuthProvider({ children }) {
   // const isLoggedIn = token ? true : false;
   const isLoggedIn = !!token;
 
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem(localTokenKey, token);
+      localStorage.setItem(localEmailKey, email);
+    } else {
+      localStorage.removeItem(localTokenKey);
+      localStorage.removeItem(localEmailKey);
+    }
+  }, [token, email]);
+
   function login(userToken, userEmail) {
     setToken(userToken);
     setEmail(userEmail);
-    localStorage.setItem(localTokenKey, userToken);
-    localStorage.setItem(localEmailKey, userEmail);
   }
   function logout() {
     // sukurti funkcija logout
     // nustato token ir email i ''
     setToken('');
     setEmail('');
-    localStorage.removeItem(localTokenKey);
-    localStorage.removeItem(localEmailKey);
   }
   // perduodam logout i authCtx
   // panaudojam logout Hederyje paspaudus logout mygtuka

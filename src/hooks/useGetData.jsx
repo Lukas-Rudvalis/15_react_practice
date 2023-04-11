@@ -15,7 +15,7 @@ function useGetData(url, initValue = []) {
     axios
       .get(url)
       .then((resp) => {
-        console.log('resp.data ===', resp.data);
+        // console.log('resp.data ===', resp.data);
         setData(resp.data);
       })
       .catch((err) => {
