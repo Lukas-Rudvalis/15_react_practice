@@ -5,7 +5,8 @@ import * as Yup from 'yup';
 import styled from 'styled-components';
 import axios from 'axios';
 import InputField from '../ui/InputComps';
-import { useAuthContext } from '../../store/AuthProvider';
+import { authActions } from '../../store/_auth';
+import { useDispatch } from 'react-redux';
 
 const url = 'https://reqres.in/api/login';
 
@@ -19,9 +20,9 @@ const inputsData = [
 ];
 
 function LoginForm() {
-  const authCtx = useAuthContext();
   // console.log('authCtx ===', authCtx);
   const [beError, setBeError] = useState('');
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -50,7 +51,7 @@ function LoginForm() {
         // irasom i contexta email, token
         const token = resp.data.token;
         const email = loginObj.email;
-        authCtx.login(token, email);
+        dispatch(authActions.login({ token, email }));
       })
       .catch((err) => {
         console.warn('sendLoginData error', err);

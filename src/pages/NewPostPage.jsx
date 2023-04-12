@@ -8,7 +8,7 @@ import axios from 'axios';
 import Feedback from '../components/ui/Feedback';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useAuthContext } from '../store/AuthProvider';
+import { useSelector } from 'react-redux';
 
 const inputsData = [
   { id: 1, type: 'text', label: 'Title', name: 'title' },
@@ -19,7 +19,7 @@ const inputsData = [
 ];
 
 function NewPostPage() {
-  const { email } = useAuthContext();
+  const email = useSelector((state) => state.auth.email);
   const navigate = useNavigate();
   // prideti newPostError state
   const [newPostError, setNewPostError] = useState({});

@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Button from '../ui/Button.styled';
 import { Link } from 'react-router-dom';
-import { useAuthContext } from '../../store/AuthProvider';
+import { useSelector } from 'react-redux';
 
 function SinglePost({ post, full = false, onDeletePost }) {
-  const { email } = useAuthContext();
+  const email = useSelector((state) => state.auth.email);
   return (
     <Card>
       {!full && <Title>{post.title}</Title>}

@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import InputField from '../ui/InputComps';
 import { useFormik } from 'formik';
 import { SubmitButton } from '../ui/Button.styled';
-import { useAuthContext } from '../../store/AuthProvider';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 function CommentForm({ postId, onNewComment }) {
-  const { email } = useAuthContext();
+  const email = useSelector((state) => state.auth.email);
   const formik = useFormik({
     initialValues: {
       author: email,

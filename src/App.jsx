@@ -8,12 +8,12 @@ import Header from './components/layout/Header';
 import PostsPage from './pages/PostsPage';
 import NewPostPage from './pages/NewPostPage';
 import SinglePostPage from './pages/SinglePostPage';
-import { useAuthContext } from './store/AuthProvider';
 import NotAllowed from './pages/NotAllowed';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const isAuth = useSelector((state) => state.auth.isLoggedIn);
   // App.jsx prideti dinamini route SinglePostPage
-  const authCtx = useAuthContext();
   return (
     <div className="">
       <Header />
@@ -23,8 +23,8 @@ function App() {
           path={'/login'}
           element={
             <>
-              {!authCtx.isLoggedIn && <LoginPage />}
-              {authCtx.isLoggedIn && <Navigate to="/posts" />}
+              {!isAuth && <LoginPage />}
+              {isAuth && <Navigate to="/posts" />}
             </>
           }
         />
@@ -33,8 +33,8 @@ function App() {
           path={'/posts'}
           element={
             <>
-              {authCtx.isLoggedIn && <PostsPage />}
-              {!authCtx.isLoggedIn && <Navigate to="/not-allowed" />}
+              {isAuth && <PostsPage />}
+              {!isAuth && <Navigate to="/not-allowed" />}
             </>
           }
         />
@@ -42,8 +42,8 @@ function App() {
           path={'/posts/:postId'}
           element={
             <>
-              {authCtx.isLoggedIn && <SinglePostPage />}
-              {!authCtx.isLoggedIn && <Navigate to="/not-allowed" />}
+              {isAuth && <SinglePostPage />}
+              {!isAuth && <Navigate to="/not-allowed" />}
             </>
           }
         />
@@ -51,8 +51,8 @@ function App() {
           path={'/posts/new'}
           element={
             <>
-              {authCtx.isLoggedIn && <NewPostPage />}
-              {!authCtx.isLoggedIn && <Navigate to="/not-allowed" />}
+              {isAuth && <NewPostPage />}
+              {!isAuth && <Navigate to="/not-allowed" />}
             </>
           }
         />

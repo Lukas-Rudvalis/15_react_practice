@@ -1,7 +1,8 @@
 import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAuthContext } from '../../store/AuthProvider';
 import Button from '../ui/Button.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../../store/_auth';
 
 const navData = [
   { id: 1, to: '/', title: 'Home' },
@@ -11,7 +12,10 @@ const navData = [
 ];
 
 function Header() {
-  const ctx = useAuthContext();
+  const isAuth = useSelector((state) => state.auth.isLoggedIn);
+  const email = useSelector((state) => state.auth.email);
+  const dispatch = useDispatch();
+
   // console.log('ctx ===', ctx);
   // console.log('isLoggedIn ===', isLoggedIn);
   return (
@@ -23,7 +27,7 @@ function Header() {
               {title}
             </SiteLink>
           ))}
-          {ctx.isLoggedIn && (
+          {isAuth && (
             <>
               <SiteLink end to={'/posts'}>
                 Posts
@@ -33,12 +37,18 @@ function Header() {
           )}
         </Nav>
         <Nav>
-          {!ctx.isLoggedIn && <SiteLink to={'/login'}>Login</SiteLink>}
-          {ctx.isLoggedIn && (
+          {!isAuth && <SiteLink to={'/login'}>Login</SiteLink>}
+          {isAuth && (
             <Flex>
-              <Email>{ctx.email}</Email>
+              <Email>{email}</Email>
               <Link to={'/'}>
-                <Button onClick={ctx.logout}>Loguot</Button>
+                <Button
+                  onClick={() => {
+                    dispatch(authActions.logout());
+                  }}
+                >
+                  Loguot
+                </Button>
               </Link>
             </Flex>
           )}

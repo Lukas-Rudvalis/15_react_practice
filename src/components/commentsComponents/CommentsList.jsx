@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '../ui/Card';
-import { useAuthContext } from '../../store/AuthProvider';
 import Button from '../ui/Button.styled';
+import { useSelector } from 'react-redux';
 
 function CommentsList({ list, onDeleteComment }) {
-  const { email } = useAuthContext();
+  const email = useSelector((state) => state.auth.email);
   return (
     <div>
       {list.map((obj) => (
