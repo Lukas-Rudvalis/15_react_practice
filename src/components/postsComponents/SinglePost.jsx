@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Button from '../ui/Button.styled';
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../../store/AuthProvider';
 
 function SinglePost({ post, full = false, onDeletePost }) {
+  const { email } = useAuthContext();
   return (
     <Card>
       {!full && <Title>{post.title}</Title>}
@@ -15,7 +17,9 @@ function SinglePost({ post, full = false, onDeletePost }) {
         <Date>{post.date}</Date>
       </Footer>
       <Control>
-        {!full && <Button onClick={() => onDeletePost(post.id)}>Delete</Button>}
+        {!full && post.author === email && (
+          <Button onClick={() => onDeletePost(post.id)}>Delete</Button>
+        )}
         {full && <Link to={`/posts`}>Go back</Link>}
         {!full && <Link to={`/posts/${post.id}`}>Read more...</Link>}
       </Control>

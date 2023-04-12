@@ -23,10 +23,25 @@ function CommentBlock({ postId }) {
       });
   }
 
+  function deleteCommentHandler(idToDelete) {
+    axios
+      .delete(`http://localhost:5000/comments/${idToDelete}`)
+      .then((resp) => {
+        console.log('resp ===', resp);
+        if (resp.status === 200) {
+          console.log('istrinta sekmingai');
+          setComments((prevComments) =>
+            prevComments.filter(({ id }) => id !== idToDelete),
+          );
+        }
+      })
+      .catch((err) => console.warn(err));
+  }
+
   return (
     <div>
       <CommentForm postId={postId} onNewComment={addNewComment} />
-      <CommentsList list={comments} />
+      <CommentsList onDeleteComment={deleteCommentHandler} list={comments} />
     </div>
   );
 }
